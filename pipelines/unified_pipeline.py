@@ -1,6 +1,7 @@
 from agents.news_agent import NewsAgent
 from agents.research_agent import ResearchAgent
 from agents.filter_agent import FilterAgent
+from agents.summarizer_agent import SummarizerAgent
 from config.settings import DEFAULT_DOMAIN
 
 
@@ -9,6 +10,7 @@ class UnifiedPipeline:
         self.news_agent = NewsAgent()
         self.research_agent = ResearchAgent()
         self.filter_agent = FilterAgent()
+        self.summarizer_agent = SummarizerAgent()
 
     def run(self, domain: str = DEFAULT_DOMAIN):
         print(f"\n🚀 Running Unified Pipeline for: {domain}\n")
@@ -40,7 +42,13 @@ class UnifiedPipeline:
 
         print(f"✅ After filtering: {len(filtered)}")
 
-        return filtered
+        # -------------------------------
+        # Step 4: Summarization + Insight Generation
+        # -------------------------------
+        summarized = self.summarizer_agent.summarize(filtered)
+        print(f"🧠 Summarized items: {len(summarized)}")
+
+        return summarized
 
     def _normalize(self, news, papers):
         """

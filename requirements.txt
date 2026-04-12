@@ -4,7 +4,7 @@ requests
 python-dotenv
 chromadb
 sentence-transformers
-google-generativeai
+groq
 streamlit
 apscheduler
 python-dotenv

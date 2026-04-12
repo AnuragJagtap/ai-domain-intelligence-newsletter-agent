@@ -7,12 +7,12 @@ def main():
 
     results = pipeline.run(DEFAULT_DOMAIN)
 
-    print("\n🧠 FINAL OUTPUT:\n")
+    print("\n🧠 FINAL NEWSLETTER CONTENT:\n")
 
     for i, item in enumerate(results, 1):
         print(f"{i}. [{item['type'].upper()}] {item['title']}")
-        print(f"   {item['content'][:150]}...")
-        print(f"   Source: {item['source']}")
+        print(f"   📝 Summary: {item.get('summary')}")
+        print(f"   💡 Insight: {item.get('insight')}")
         print("-" * 60)
 
 
