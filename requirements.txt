@@ -7,3 +7,5 @@ sentence-transformers
 google-generativeai
 streamlit
 apscheduler
+python-dotenv
+feedparser
