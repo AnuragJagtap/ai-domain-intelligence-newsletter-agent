@@ -1,27 +1,19 @@
-from pipelines.unified_pipeline import UnifiedPipeline
-from config.settings import DEFAULT_DOMAIN
-
+from agents.autonomous_orchestrator import AutonomousSystem
 
 def main():
-    pipeline = UnifiedPipeline()
+    system = AutonomousSystem()
 
-    results = pipeline.run(DEFAULT_DOMAIN)
+    goal = "Generate an AI newsletter with insights and learning suggestions"
 
-    print("\n🧠 FINAL NEWSLETTER CONTENT:\n")
+    results = system.run(goal)
 
-    for i, item in enumerate(results, 1):
-        print(f"{i}. [{item['type'].upper()}] {item['title']}")
-        print(f"   📝 Summary: {item.get('summary')}")
-        print(f"   💡 Insight: {item.get('insight')}")
+    print("\n🧠 AUTONOMOUS OUTPUT:\n")
 
-        learning = item.get("learning", {})
-
-        print("   📚 Learn:")
-        print(f"      Concepts: {learning.get('concepts')}")
-        print(f"      Resources: {learning.get('resources')}")
-        print(f"      Next Steps: {learning.get('next_steps')}")
-        
-        print("-" * 60)
+    for item in results:
+        print(item["title"])
+        print(item.get("summary"))
+        print(item.get("learning"))
+        print("-" * 50)
 
 
 if __name__ == "__main__":

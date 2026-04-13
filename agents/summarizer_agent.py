@@ -73,7 +73,7 @@ Do NOT include markdown, code blocks, or explanations.:
             temperature=0.3
         )
 
-        text = response.choices[0].message.content.strip()
+        text = item.get("content", "")[:500]  # 🔥 LIMIT TEXT
 
         return self._parse_response(text)
 

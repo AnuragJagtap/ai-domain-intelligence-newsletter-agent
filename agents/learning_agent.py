@@ -46,26 +46,35 @@ class LearningAgent:
     def _generate_single(self, item: Dict) -> Dict:
 
         prompt = f"""
-You are an AI mentor.
+You are an expert AI mentor helping a learner stay updated with new developments.
 
-Based on the following content, suggest:
+Based on the following:
 
-1. Key concepts to learn
-2. Useful resources/topics
-3. Practical next steps
-
-Content:
 Title: {item.get('title')}
 Summary: {item.get('summary')}
+Insight: {item.get('insight')}
+
+Generate a HIGH-QUALITY learning plan.
 
 Return ONLY JSON:
+
 {{
-  "concepts": ["..."],
-  "resources": ["..."],
-  "next_steps": ["..."]
+  "concepts": [
+    "Specific technical concepts (not generic)"
+  ],
+  "resources": [
+    "Specific topics, tools, or areas to explore"
+  ],
+  "next_steps": [
+    "Concrete actionable steps (projects, implementations, practice)"
+  ]
 }}
 
-Respond in English only. Do not include markdown.
+Rules:
+- Be specific (avoid generic phrases like 'explore topic')
+- Focus on practical learning
+- Keep it relevant to AI/ML/Tech
+- Respond in English only
 """
 
         response = self.client.chat.completions.create(
@@ -74,10 +83,10 @@ Respond in English only. Do not include markdown.
                 {"role": "system", "content": "You are a precise AI mentor."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0.4
+            temperature=0.6
         )
 
-        text = response.choices[0].message.content.strip()
+        text = item.get("content", "")[:500]  # 🔥 LIMIT TEXT
 
         return self._parse_response(text)
 
