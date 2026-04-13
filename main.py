@@ -13,6 +13,14 @@ def main():
         print(f"{i}. [{item['type'].upper()}] {item['title']}")
         print(f"   📝 Summary: {item.get('summary')}")
         print(f"   💡 Insight: {item.get('insight')}")
+
+        learning = item.get("learning", {})
+
+        print("   📚 Learn:")
+        print(f"      Concepts: {learning.get('concepts')}")
+        print(f"      Resources: {learning.get('resources')}")
+        print(f"      Next Steps: {learning.get('next_steps')}")
+        
         print("-" * 60)
 
 
